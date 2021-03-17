@@ -1,6 +1,9 @@
 #3D Image Board Viewer / Photo tool
 ## by Chris Godber
 ### Status - Under Development
+
+![alt text](https://github.com/drnoir/3D-Image-Board-Viewer-/blob/main/src/images/app-pic.jpg?raw=true)
+
 An experimental 3D app built with React and React-Three-Fiber for arranging 
 and displaying images on a canvas
 
