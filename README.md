@@ -1,4 +1,27 @@
-# Getting Started with Create React App
+#3D Image Board Viewer / Photo tool
+## by Chris Godber
+### Status - Under Development
+An experimental 3D app built with React and React-Three-Fiber for arranging 
+and displaying images on a canvas
+
+- Drag images around in 3D into different arrangements
+- Take a photo of arrangements and download images
+- zoom images - make 3D images bigger to view detail
+
+App is currently in early development phase 
+
+Features to develop
+- Add custom images - currently just placeholders
+- enhance UI
+- More move features 
+- Better visuals / backgrounds etc
+
+## Core Libraries and dependencies 
+- React 
+- React-three-fiber
+- three 
+- html-to-image - for capturing canvas
+- drei
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
