@@ -1,4 +1,4 @@
-#3D Image Board Viewer / Photo tool
+# 3D Image Board Viewer / Photo tool
 ## by Chris Godber
 ### Status - Under Development
 
