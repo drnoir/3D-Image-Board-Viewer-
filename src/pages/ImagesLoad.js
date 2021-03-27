@@ -1,13 +1,11 @@
 import React, {useState, useRef, Suspense} from 'react'
 import './App.css'
-import {Link} from "react-router-dom";
-import BoardView from "./BoardView";
 import * as htmlToImage from "html-to-image";
 import {Canvas, useLoader, useThree} from "react-three-fiber";
 import {TextureLoader} from "three";
 import {useDrag} from "react-use-gesture";
 import placeholder from "../images/placeholder.png";
-import {FlyControls, Html} from "@react-three/drei";
+import {FlyControls} from "@react-three/drei";
 
 
 //used for random positioning
@@ -65,6 +63,7 @@ export default function ImagesLoad() {
     const [File, setFile] = useState('')
     const [Images, setImage] = useState([])
     const [ImageDivs, setImageDiv] = useState([])
+    const [orientation , setOrientation] = useState('portrait')
 
     let $imagePreview = null;
     if (imagePreviewUrl) {
@@ -73,6 +72,26 @@ export default function ImagesLoad() {
         $imagePreview = (<img className="previewImage" src={placeholder}/>);
     }
 
+    let ScaleVal
+    let initScaleVal
+
+    function setSizeImage(orientation){
+        if(orientation === "portrait"){
+            initScaleVal = [2.5, 4, 0.1]
+            ScaleVal = [4.5, 8, 0.1]
+        }
+        if(orientation === "landscape"){
+            initScaleVal = [5, 2.5, 0.1]
+            ScaleVal = [8, 4.5, 0.1]
+        }
+        if(orientation === "square"){
+            initScaleVal = [2.5, 2.5, 0.1]
+            ScaleVal = [5, 5, 0.1]
+        }
+    }
+
+   setSizeImage(orientation);
+
     const board =
         <div id = "my-node">
             <Canvas camera={{ fov: 75, position: [0, 0, 8] }} gl={{ preserveDrawingBuffer: true }}>
@@ -80,9 +99,11 @@ export default function ImagesLoad() {
                 <ambientLight intensity={0.6} />
                 <Suspense fallback={null}>
                     {/*map here*/}
-                    {Images.map((Image, index) => (
-                        <Box key={index}  scale ={[5,5,0.1]} Initscale ={[2.5, 2.5, 0.01]}  artworkTexture={Image} />
-                        ))}
+                    {Images ?
+                    Images.map((Image, index) => (
+                        <Box key={index}  scale ={ScaleVal} Initscale ={initScaleVal}  artworkTexture={Image} />
+                        ))
+                    : null}
                 </Suspense>
                 <FlyControls/>
             </Canvas>
@@ -114,15 +135,15 @@ export default function ImagesLoad() {
                     <div className="image-box">
                         {$imagePreview}
                     </div>
+                <p>{File.name}</p>
             </div>
         setImageDiv( ImageDivs.concat(newImage) )
     }
 
-
             return (
             <div className="container">
                 <h1 className="center">3D Mood Board Viewer</h1>
-                <p className="center">Add your Images below (up to 8) and then click add to board to view them in 3D</p>
+                <p className="center">Add your Images below (up to 8) and view them in 3D</p>
                 <div className="center">
                     <input
                         className="file-upload"
@@ -132,10 +153,10 @@ export default function ImagesLoad() {
                         onChange={(e) => loadImage(e)}
                     />
                     <label htmlFor="orientation">Select Image Orientation:</label>
-                    <select name="orientation" id="orientation">
+                    <select name="orientation" id="orientation"  value={orientation}  onChange={(e) =>  setOrientation(e.target.value)} >
                         <option value="portrait">Portrait</option>
                         <option value="landscape">Landscape</option>
-                        <option value="landscape">Square</option>
+                        <option value="square">Square</option>
                     </select>
                     <div className="image-wrapper">
                     {ImageDivs}
