@@ -3,12 +3,12 @@ import { TextureLoader} from "three"
 import { Canvas, useThree,  useLoader  } from 'react-three-fiber'
 import  './App.css'
 
-import art1 from './images/art/1.jpg'
-import art2 from './images/art/2.jpg'
-import art3 from './images/art/3.jpg'
-import art4 from './images/art/4.jpg'
-import art5 from './images/art/5.jpg'
-import art6 from './images/art/6.jpg'
+import art1 from '../images/art/1.jpg'
+import art2 from '../images/art/2.jpg'
+import art3 from '../images/art/3.jpg'
+import art4 from '../images/art/4.jpg'
+import art5 from '../images/art/5.jpg'
+import art6 from '../images/art/6.jpg'
 
 import { useDrag } from "react-use-gesture"
 import { FlyControls , Html, Text } from '@react-three/drei'
@@ -81,7 +81,7 @@ export default function BoardView() {
                 <FlyControls/>
                 <Html>
                     <div id = "buttons">
-                        <button>Reset</button>
+                        <button className ="reset" >Reset</button>
                         <button className ="photo" onClick={takeImage}>Take Photo</button>
                     </div>
                 </Html>
